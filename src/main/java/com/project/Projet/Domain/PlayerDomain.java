@@ -1,25 +1,21 @@
-package com.project.Projet.Entity;
+package com.project.Projet.Domain;
 
-import jakarta.persistence.*;
+public class PlayerDomain {
 
-@Entity
-@Table(name = "players")
-public class Player {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String username;
-
-    @Column(nullable = false, unique = true)
     private String email;
 
-    // Constructeur JPA
-    public Player() {}
+    // Constructeurs
+    public PlayerDomain() {}
 
-    public Player(String username, String email) {
+    public PlayerDomain(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    public PlayerDomain(Long id, String username, String email) {
+        this.id = id;
         this.username = username;
         this.email = email;
     }
