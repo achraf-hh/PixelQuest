@@ -2,71 +2,66 @@ package com.project.Projet.Entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "parties")
 public class Party {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Double score;
 
-    @ManyToMany
-    @JoinTable(
-            name = "party_players",
-            joinColumns = @JoinColumn(name = "party_id"),
-            inverseJoinColumns = @JoinColumn(name = "player_id")
-    )
-    private List<Player> players = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime creationDate;
 
-    // Constructeur par défaut
-    public Party() {
-        this.createdAt = LocalDateTime.now();
-    }
+    @ManyToOne
+    @JoinColumn(name = "player_id")
+    private Player player;
 
-    // Constructeur avec paramètres
-    public Party(String name, List<Player> players) {
-        this.name = name;
-        this.players = players;
-        this.createdAt = LocalDateTime.now();
-    }
+    @ManyToOne
+    @JoinColumn(name = "labyrinth_id")
+    private Labyrinth labyrinth;
 
-    // Getters et Setters
+    public Party() {}
+
+    // Getters & Setters
+
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Double getScore() {
+        return score;
+    }
+    public void setScore(double xp) {
+        this.score = xp;
+    }
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+    public Player getPlayer() {
+        return player;
+    }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    public Labyrinth getLabyrinth() {
+        return labyrinth;
+    }
+    public void setLabyrinth(Labyrinth labyrinth) {
+        this.labyrinth = labyrinth;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }

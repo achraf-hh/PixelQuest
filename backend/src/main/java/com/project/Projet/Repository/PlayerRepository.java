@@ -1,12 +1,6 @@
 package com.project.Projet.Repository;
 
-import com.project.Projet.Entity.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.project.Projet.Entity.Player;
 
-@Repository
-public interface PlayerRepository extends JpaRepository<Player, Long> {
-    boolean existsByEmail(String email);
-
-    boolean existsByUsername(String username);
-}
+public interface PlayerRepository extends JpaRepository<Player, Long> {}

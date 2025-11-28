@@ -1,35 +1,30 @@
 package com.project.Projet.Controller;
 
-import com.project.Projet.Domain.PlayerDomain;
-import com.project.Projet.Service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.project.Projet.Entity.Player;
+import com.project.Projet.Service.PlayerService;
 
-@CrossOrigin(origins = "http://localhost:5173") // autorise ton frontend Vite
 @RestController
-@RequestMapping("/api/players")
+@RequestMapping("/players")
 public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
 
-    // Créer un joueur
     @PostMapping
-    public PlayerDomain createPlayer(@RequestBody PlayerDomain playerDomain) {
-        return playerService.createPlayer(playerDomain);
+    public Player create(@RequestBody Player p) {
+        return playerService.createPlayer(p);
     }
 
-    // Lister tous les joueurs
-    @GetMapping
-    public List<PlayerDomain> getAllPlayers() {
-        return playerService.getAllPlayers();
-    }
-
-    // Supprimer un joueur par ID
-    @DeleteMapping("/{id}")
-    public void deletePlayer(@PathVariable Long id) {
-        playerService.deletePlayer(id);
+    @GetMapping("/{id}")
+    public Player get(@PathVariable Long id) {
+        return playerService.getPlayer(id);
     }
 }
