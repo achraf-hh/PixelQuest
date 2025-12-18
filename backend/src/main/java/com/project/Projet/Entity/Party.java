@@ -22,23 +22,42 @@ public class Party {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    @ManyToOne
-    @JoinColumn(name = "labyrinth_id")
-    private Labyrinth labyrinth;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "x", column = @Column(name = "start_x")),
+            @AttributeOverride(name = "y", column = @Column(name = "start_y"))
+    })
+    private Point startPoint;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "x", column = @Column(name = "target_x")),
+            @AttributeOverride(name = "y", column = @Column(name = "target_y"))
+    })
+    private Point targetPoint;
+
+    @OneToMany(mappedBy = "party", cascade = CascadeType.ALL)
+    private List<PointSample> samples;
 
     public Party() {}
 
-    // Getters & Setters
-
+    //getters and setters
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Double getScore() {
         return score;
     }
-    public void setScore(double xp) {
-        this.score = xp;
+
+    public void setScore(Double score) {
+        this.score = score;
     }
+
     public Difficulty getDifficulty() {
         return difficulty;
     }
@@ -57,11 +76,23 @@ public class Party {
     public void setPlayer(Player player) {
         this.player = player;
     }
-    public Labyrinth getLabyrinth() {
-        return labyrinth;
+    public Point getStartPoint() {
+        return startPoint;
     }
-    public void setLabyrinth(Labyrinth labyrinth) {
-        this.labyrinth = labyrinth;
+    public void setStartPoint(Point startPoint) {
+        this.startPoint = startPoint;
+    }
+    public Point getTargetPoint() {
+        return targetPoint;
+    }
+    public void setTargetPoint(Point targetPoint) {
+        this.targetPoint = targetPoint;
+    }
+    public List<PointSample> getSamples() {
+        return samples;
+    }
+    public void setSamples(List<PointSample> samples) {
+        this.samples = samples;
     }
 
 }

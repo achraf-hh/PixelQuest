@@ -22,6 +22,15 @@ public class Player {
 
     public Player() {}
 
+    private Double fittsA; // Intercept (a)
+    private Double fittsB; // Slope (b)
+
+    // ... getters and setters ...
+    public Double getFittsA() { return fittsA; }
+    public void setFittsA(Double fittsA) { this.fittsA = fittsA; }
+
+    public Double getFittsB() { return fittsB; }
+    public void setFittsB(Double fittsB) { this.fittsB = fittsB; }
     // Getters & Setters
 
     public Long getId() {
